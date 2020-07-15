@@ -1,47 +1,30 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Chat from './components/Chat';
+import WelcomePage from './components/WelcomePage'
 import './App.css';
-import MessageForm from './components/MessageForm';
-import MessageList from './components/MessageList'
+
 
 class App extends React.Component {
   state = {
-    messages: []
+    nickname: ''
   }
-
-  socket = new WebSocket('ws://st-chat.shas.tel')
 
   componentDidMount() {
-    this.socket.onmessage = (e) => {
-      const NewMessages = JSON.parse(e.data).sort((a, b) => {
-        return a.time - b.time
-      })
-      console.log(NewMessages)
-      this.setState(({ messages }) =>
-        {
-        return {
-          messages: messages.concat(NewMessages)
-        }
-      })
-    }
-  }
-
-  sendMessage = (message) => {
-    this.socket.send(JSON.stringify({
-      from: 'Rysz',
-      message
-  }))
+    const nickname = localStorage.getItem('nickname')
+    this.setState({
+      nickname
+    })
   }
 
   render() {
     return (
-      <div>
-        <MessageList messages={this.state.messages}/>
-        <MessageForm sendMessage={this.sendMessage} /> 
-      </div>
+      <Router>
+        <Route path="/" exact component={this.state.nickname ? Chat : WelcomePage} />
+        <Route path="/chat" component={Chat} />
+      </Router>
     );
   }
 }
-
-
 
 export default App;
