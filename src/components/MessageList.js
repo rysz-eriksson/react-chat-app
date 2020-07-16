@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ScrollToBottom from 'react-scroll-to-bottom';
 import MessageItem from './MessageItem';
 
-export default class MessageList extends React.Component {
 
-    render() {
-        const { messages } = this.props
+export default ({ messages }) => {
+
         return (
-            <div>
-            {messages.map(message => <MessageItem message={message} key={message.id} />)}
-            </div>
+            <ScrollToBottom>
+                {messages.map(message => <MessageItem message={message} key={message.id} />)}
+            </ScrollToBottom>
         )
-    }
 }

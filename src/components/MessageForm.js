@@ -1,36 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Smile } from 'react-feather';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 
-export default class MessageForm extends React.Component {
-    state = {
-        message: ''
+export default (props) => {
+    
+    const [message, setMessage] = useState('')
+    const [showEmojiPicker, setEmojiPicker ] = useState(false)
+
+    const handleChange = (e) => {
+        setMessage(e.target.value)
     }
 
-    handleChange = (e) => {
-        this.setState({
-            message: e.target.value
-        })
-    }
-
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.sendMessage(this.state.message);
-        this.setState({
-            message: ''
-        });
-
+        props.sendMessage(message);
+        setMessage('')
     }
-    render() {
-        const { message } = this.state
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
+                {showEmojiPicker && <Picker 
+                set="facebook"
+                onSelect={(emoji) => {
+                    setMessage(`${message}${emoji.native}`)
+                }}
+                />}
+                <button 
+                type="button"
+                onClick={() => {
+                    setEmojiPicker(!showEmojiPicker)
+                }}
+                >
+                    <Smile />
+                  </button>
                 <input 
                 placeholder='Hit ENTER to send message'
                 value={message}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 type="text"
                 />
             </form>
         )
-    } 
-
 }

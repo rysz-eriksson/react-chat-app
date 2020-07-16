@@ -1,6 +1,7 @@
 import React from 'react';
 import MessageForm from './MessageForm';
-import MessageList from './MessageList'
+import MessageList from './MessageList';
+import Container from '@material-ui/core/Container';
 
 class Chat extends React.Component {
   state = {
@@ -40,7 +41,7 @@ class Chat extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: '50vh', width: '50vw'}}>
         <MessageList messages={this.state.messages}/>
         <MessageForm sendMessage={this.sendMessage} /> 
       </div>
