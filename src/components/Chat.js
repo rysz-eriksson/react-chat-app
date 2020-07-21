@@ -2,6 +2,7 @@ import React from 'react';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import { sound, playSound } from '../services/sound'
 
 class Chat extends React.Component {
   constructor(props) {
@@ -12,13 +13,27 @@ class Chat extends React.Component {
   state = {
     messages: [],
     nickname: '',
-    errorMessage: ''
+    errorMessage: '',
+    hidden: false,
+    count: 0
   }
-  
 
   connect = () => {
     this.socket = new WebSocket('ws://st-chat.shas.tel');
     this.socket.onmessage = (e) => {
+       if (this.state.hidden) {
+         this.setState(({ count }) => {
+           return {
+             count: count + JSON.parse(e.data).length
+           }
+         })
+        document.title = `(${this.state.count}) You have new messages`;
+        playSound(sound)
+
+       } else {
+         this.setState({ count: 0 })
+         document.title = 'React App'
+       }
       this.setState({errorMessage: ''})
       const NewMessages = JSON.parse(e.data).sort((a, b) => {
         return a.time - b.time
@@ -41,7 +56,7 @@ class Chat extends React.Component {
 
     this.socket.onclose = (e) => {
       this.setState({messages: []})
-      this.setState({errorMessage: 'Lost connection with server. Re-connecting'})
+      this.setState({errorMessage: 'Lost connection with server. Re-connecting. Restart app if nothing changes'})
       setTimeout(check(), this.reTryInterval) 
     }
 
@@ -55,6 +70,10 @@ class Chat extends React.Component {
         messages,
         nickname
       }
+    })
+
+    document.addEventListener('visibilitychange', (e) => {
+      this.setState({ hidden: e.target.hidden })
     })
 
     this.connect();
