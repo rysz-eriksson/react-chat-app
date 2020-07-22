@@ -11,7 +11,8 @@ import 'emoji-mart/css/emoji-mart.css';
 const useStyles = makeStyles({
     root: {
         display: 'flex',
-        height: '50px'
+        height: '50px',
+        backgroundColor: '#fafafa'
     },
     input: {
         padding: '3px 10px'

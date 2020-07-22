@@ -12,7 +12,9 @@ const styles = theme => ({
     minHeight: '400px',
     height: '60vh',
     borderRadius: '10px',
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
