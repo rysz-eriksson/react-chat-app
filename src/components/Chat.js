@@ -26,14 +26,10 @@ class Chat extends React.Component {
            return {
              count: count + JSON.parse(e.data).length
            }
-         })
+         });
         document.title = `(${this.state.count}) You have new messages`;
-        playSound(sound)
-
-       } else {
-         this.setState({ count: 0 })
-         document.title = 'React App'
-       }
+        playSound(sound);
+       } 
       this.setState({errorMessage: ''})
       const NewMessages = JSON.parse(e.data).sort((a, b) => {
         return a.time - b.time
@@ -74,6 +70,10 @@ class Chat extends React.Component {
 
     document.addEventListener('visibilitychange', (e) => {
       this.setState({ hidden: e.target.hidden })
+      if (e.target.visible) {
+        this.setState({ count: 0 })
+      };
+      document.title = 'React App';
     })
 
     this.connect();
