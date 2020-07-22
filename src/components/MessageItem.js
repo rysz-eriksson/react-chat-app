@@ -11,16 +11,26 @@ const useStyles = makeStyles({
     avatar: {
         margin: '0.5em'
     },
+    messageItem: {
+        width: '90%'
+    },
     span: {
         marginRight: '0.5em'
     },
     paragraph: {
         wordWrap: 'break-word',
-        width: '95vw',
+        width: 'fit-content',
+        maxWidth: '100%',
+        backgroundColor: 'lightgray',
+        padding: '5px 10px',
+        borderRadius: '10px'
+    },
+    fromMe: {
+        backgroundColor: '#372549'
     }
 })
 
-export default ({ message }) => {
+export default ({ message, fromMe }) => {
 
     const displayTime = () => {
         const now = moment()
@@ -35,8 +45,8 @@ export default ({ message }) => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
-            <Avatar className={classes.avatar}>{message.from.slice(0,1).toUpperCase()}</Avatar>
-            <div>
+            <Avatar className={`${classes.avatar} ${fromMe ? classes.fromMe : ''}`}>{message.from.slice(0,1).toUpperCase()}</Avatar>
+            <div className={classes.messageItem}>
                 <span className={classes.span}>{message.from}</span>
                 <span className={classes.span}>{displayTime()}</span>
                 <p className={classes.paragraph}>{message.message}</p>
