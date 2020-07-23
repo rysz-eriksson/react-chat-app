@@ -16,7 +16,6 @@ const styles = theme => ({
     backgroundColor: '#fafafa',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid rgb(49, 45, 60)'
   }
 });
 
@@ -73,7 +72,6 @@ class Chat extends React.Component {
     }
 
   }
-
 
   componentDidMount() {
     const nickname = localStorage.getItem('nickname')

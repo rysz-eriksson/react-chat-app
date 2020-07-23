@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { Smile } from 'react-feather';
 import { Picker } from 'emoji-mart';
@@ -67,7 +66,6 @@ export default (props) => {
                 variant="contained"
                 color="secondary"
                 size="large"
-                endIcon={<Icon>send</Icon>}
                 type="submit"
               >Send</Button>
             </form>

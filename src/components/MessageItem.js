@@ -31,11 +31,11 @@ const useStyles = makeStyles({
         justifyContent: 'flex-end'
     },
     fmAvatar: {
-        backgroundColor: '#372549'
+        backgroundColor: 'rgb(49, 45, 60)'
     },
     fmParapraph: {
         color: '#fff',
-        backgroundColor: 'rgba(55, 37, 73, 1)',
+        backgroundColor: 'rgb(49, 45, 60)',
         margin: '0 0 0 auto',
         textAlign: 'left'
     },

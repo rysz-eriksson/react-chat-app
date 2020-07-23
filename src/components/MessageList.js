@@ -6,7 +6,6 @@ import MessageItem from './MessageItem';
 const useStyles = makeStyles({
   root: {
     overflow: 'auto',
-    height: '100%',
     width: '100%',
     paddingBottom: '30px'
   },

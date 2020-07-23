@@ -7,7 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
     root: {
         backgroundColor: '#372549',
-        color: '#fff'
+        color: '#fff',
+        borderRadius: '9px 9px 0 0'
     },
     title: {
         padding: '10px 20px'
