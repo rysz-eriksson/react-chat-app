@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
+import ReactEmoji from 'react-emoji';
 
 const useStyles = makeStyles({
     container: {
@@ -67,7 +68,7 @@ export default ({ message, fromMe }) => {
             <div className={`${classes.messageItem} ${fromMe ? classes.fmMessageItem : ''}`}>
                 <Typography variant='caption' component='span' className={classes.span}>{message.from}</Typography>
                 <Typography variant='caption' component='span' className={`${fromMe ? classes.fmSpan : classes.span}`}>{displayTime()}</Typography>
-                <Typography variant='body1' component='p' className={`${classes.paragraph} ${fromMe ? classes.fmParapraph : ''}`}>{message.message}</Typography>
+                <Typography variant='body1' component='p' className={`${classes.paragraph} ${fromMe ? classes.fmParapraph : ''}`}>{ReactEmoji.emojify(message.message)}</Typography>
             </div>
         </div>
     )

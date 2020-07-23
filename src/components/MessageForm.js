@@ -10,13 +10,17 @@ const useStyles = makeStyles({
     root: {
         display: 'flex',
         height: '50px',
-        backgroundColor: '#fafafa'
+        backgroundColor: '#fafafa',
     },
     input: {
         padding: '3px 10px'
     },
     button: {
         width: '60px'
+    },
+    picker: {
+        position: 'absolute',
+        left: '20px'
     }
 });
 
@@ -40,6 +44,7 @@ export default (props) => {
             <form onSubmit={handleSubmit} className={classes.root}>
                 {showEmojiPicker && <Picker 
                 set="facebook"
+                className={classes.picker}
                 onSelect={(emoji) => {
                     setMessage(`${message}${emoji.native}`)
                 }}
