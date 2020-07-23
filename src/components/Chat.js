@@ -8,10 +8,10 @@ import { sound, playSound } from '../services/sound'
 
 const styles = theme => ({
   root: {
-    width: '40vw',
+    width: '30vw',
     minWidth: '300px',
-    minHeight: '400px',
-    height: '60vh',
+    minHeight: '450px',
+    height: '45vw',
     borderRadius: '10px',
     backgroundColor: '#fafafa',
     display: 'flex',

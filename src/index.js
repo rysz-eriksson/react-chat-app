@@ -19,7 +19,7 @@ const theme = createMuiTheme({
       fontFamily: "Playfair Display",
       fontWeight: "bold"
     },
-    h6: {
+    h5: {
       fontFamily: "Poppins",
     },
     body2: {

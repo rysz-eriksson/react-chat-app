@@ -5,16 +5,13 @@ import WelcomePage from './components/WelcomePage'
 import './App.css';
 
 
-class App extends React.Component {
-
-  render() {
+const App = () => {
     return (
       <Router>
         <Route path="/" exact component={WelcomePage} />
         <Route path="/chat" component={Chat} />
       </Router>
     );
-  }
 }
 
 export default App;

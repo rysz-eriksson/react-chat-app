@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 export default ({ messages, nickname }) => {
     const classes = useStyles()
         return (
-            <ScrollToBottom className={classes.root} followButtonClassName={classes.button}>
+            <ScrollToBottom behavior='smooth' className={classes.root} followButtonClassName={classes.button}>
                 {messages.map(message => {
                   if (nickname === message.from) {
                     return <MessageItem message={message} key={message.id} fromMe />

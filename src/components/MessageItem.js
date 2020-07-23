@@ -1,32 +1,50 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
 const useStyles = makeStyles({
     container: {
         display: 'flex',
-        
+        marginTop: '1rem'
     },
     avatar: {
-        margin: '0.5em'
+        margin: '0.5rem'
     },
     messageItem: {
-        width: '90%'
+        width: '85%'
     },
     span: {
-        marginRight: '0.5em'
+        marginRight: '0.5rem',
     },
     paragraph: {
         wordWrap: 'break-word',
         width: 'fit-content',
         maxWidth: '100%',
-        backgroundColor: 'lightgray',
+        backgroundColor: '#E8E8E8',
         padding: '5px 10px',
         borderRadius: '10px'
     },
-    fromMe: {
+    fmContainer: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-end'
+    },
+    fmAvatar: {
         backgroundColor: '#372549'
+    },
+    fmParapraph: {
+        color: '#fff',
+        backgroundColor: 'rgba(55, 37, 73, 1)',
+        margin: '0 0 0 auto',
+        textAlign: 'left'
+    },
+    fmMessageItem: {
+        textAlign: 'end',
+        marginLeft: '10px'
+    },
+    fmSpan: {
+        marginLeft: '0.5rem',
     }
 })
 
@@ -44,12 +62,12 @@ export default ({ message, fromMe }) => {
     }
     const classes = useStyles();
     return (
-        <div className={classes.container}>
-            <Avatar className={`${classes.avatar} ${fromMe ? classes.fromMe : ''}`}>{message.from.slice(0,1).toUpperCase()}</Avatar>
-            <div className={classes.messageItem}>
-                <span className={classes.span}>{message.from}</span>
-                <span className={classes.span}>{displayTime()}</span>
-                <p className={classes.paragraph}>{message.message}</p>
+        <div className={`${classes.container} ${fromMe ? classes.fmContainer : ''}`}>
+            <Avatar className={`${classes.avatar} ${fromMe ? classes.fmAvatar : ''}`}>{message.from.slice(0,1).toUpperCase()}</Avatar>
+            <div className={`${classes.messageItem} ${fromMe ? classes.fmMessageItem : ''}`}>
+                <Typography variant='caption' component='span' className={classes.span}>{message.from}</Typography>
+                <Typography variant='caption' component='span' className={`${fromMe ? classes.fmSpan : classes.span}`}>{displayTime()}</Typography>
+                <Typography variant='body1' component='p' className={`${classes.paragraph} ${fromMe ? classes.fmParapraph : ''}`}>{message.message}</Typography>
             </div>
         </div>
     )
