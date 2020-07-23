@@ -1,6 +1,7 @@
 import React from 'react';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
+import Header from './Header';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { withStyles } from "@material-ui/core/styles";
 import { sound, playSound } from '../services/sound'
@@ -14,7 +15,8 @@ const styles = theme => ({
     borderRadius: '10px',
     backgroundColor: '#fafafa',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: '1px solid rgb(49, 45, 60)'
   }
 });
 
@@ -104,6 +106,7 @@ class Chat extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
+        <Header nickname={this.state.nickname}/>
         <MessageList messages={this.state.messages} nickname={this.state.nickname} />
         {this.state.errorMessage && 
           <Alert severity="error">

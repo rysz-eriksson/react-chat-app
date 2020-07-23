@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 
-export default () => {
-    const [name, setName] = useState('');
+export default class WelcomePage extends React.Component {
 
-    const handleSignIn = () => {
-        localStorage.setItem('nickname', name)
+    state = {
+        nickname: ''
     }
 
-    return (
-        <div>
-            <h1>Welcome</h1>
-            <input 
-            placeholder="please type your nickname"
-            type="text"
-            onChange={(event) => setName(event.target.value)}
-            />
-            <Link to='/chat' onClick={handleSignIn}>
-                <button type="submit">Sign-in</button>
-            </Link>
-        </div>
-    )
-}
+    componentDidMount() {
+        const nickname = localStorage.getItem('nickname')
+        this.setState({
+          nickname
+        })
+      }
+
+
+    handleSignIn = (e) => {
+        e.preventDefault();
+        this.setState({nickname: e.target.nickname.value})
+        localStorage.setItem('nickname', e.target.nickname.value)
+    }
+
+    render() {
+        if (this.state.nickname) {
+            return <Redirect to="/chat" />
+        } else {
+            return (
+                <div>
+                <h1>Welcome</h1>
+                <form onSubmit={this.handleSignIn}>
+                    <input 
+                    name="nickname"
+                    placeholder="please type your nickname"
+                    type="text"
+                    />
+                <button type='submit'>Sign-in</button>
+                </form>
+            </div>
+            )
+        }
+}}

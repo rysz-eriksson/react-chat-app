@@ -6,21 +6,11 @@ import './App.css';
 
 
 class App extends React.Component {
-  state = {
-    nickname: ''
-  }
-
-  componentDidMount() {
-    const nickname = localStorage.getItem('nickname')
-    this.setState({
-      nickname
-    })
-  }
 
   render() {
     return (
       <Router>
-        <Route path="/" exact component={this.state.nickname ? Chat : WelcomePage} />
+        <Route path="/" exact component={WelcomePage} />
         <Route path="/chat" component={Chat} />
       </Router>
     );
