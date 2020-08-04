@@ -46,13 +46,13 @@ class Chat extends React.Component {
         playSound(sound);
        } 
       this.setState({errorMessage: ''})
-      const NewMessages = JSON.parse(e.data).sort((a, b) => {
+      const newMessages = JSON.parse(e.data).sort((a, b) => {
         return a.time - b.time
       })
       this.setState(({ messages }) =>
         {
         return {
-          messages: messages.concat(NewMessages)
+          messages: messages.concat(newMessages)
         }
       })
     }
@@ -61,11 +61,12 @@ class Chat extends React.Component {
       
       if (!this.socket || this.socket.readyState === 3) this.connect();
   };
-    this.socket.onerror = (e) => {
+
+    this.socket.onerror = () => {
       this.socket.close()
     };
 
-    this.socket.onclose = (e) => {
+    this.socket.onclose = () => {
       this.setState({messages: []})
       this.setState({errorMessage: 'Lost connection with server. Re-connecting. Restart app if nothing changes'})
       setTimeout(check(), this.reTryInterval) 
@@ -100,11 +101,15 @@ class Chat extends React.Component {
   }))
   }
 
+  handleSignOut = () => {
+    localStorage.removeItem('nickname')
+}
+
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Header nickname={this.state.nickname}/>
+        <Header nickname={this.state.nickname} handleSignOut={this.handleSignOut}/>
         <MessageList messages={this.state.messages} nickname={this.state.nickname} />
         {this.state.errorMessage && 
           <Alert severity="error">

@@ -23,11 +23,7 @@ const useStyles = makeStyles({
 
 })
 
-export default ({ nickname }) => {
-
-    const handleSignOut = () => {
-        localStorage.removeItem('nickname')
-    }
+export default ({ nickname, handleSignOut }) => {
     const classes = useStyles()
     return (
         <Grid
