@@ -14,7 +14,8 @@ const useStyles = makeStyles({
         margin: '0.5rem'
     },
     messageItem: {
-        width: '85%'
+        maxWidth: '80%',
+        flex: '1 1 auto'
     },
     span: {
         marginRight: '0.5rem',
@@ -29,7 +30,6 @@ const useStyles = makeStyles({
     },
     fmContainer: {
         flexDirection: 'row-reverse',
-        justifyContent: 'flex-end'
     },
     fmAvatar: {
         backgroundColor: 'rgb(49, 45, 60)'
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     fmSpan: {
         marginLeft: '0.5rem',
     }
-})
+});
 
 export default ({ message, fromMe }) => {
 

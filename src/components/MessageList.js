@@ -7,7 +7,8 @@ const useStyles = makeStyles({
   root: {
     overflow: 'auto',
     width: '100%',
-    paddingBottom: '30px'
+    paddingBottom: '30px',
+    flex: '1 1 auto'
   },
   button: {
     backgroundColor: '#372549',
