@@ -25,6 +25,7 @@ class Chat extends React.Component {
     this.socket = null
     this.reTryInterval = 1000
   }
+  
   state = {
     messages: [],
     nickname: '',
@@ -35,6 +36,7 @@ class Chat extends React.Component {
 
   connect = () => {
     this.socket = new WebSocket('ws://st-chat.shas.tel');
+    console.log(this.socket)
     this.socket.onmessage = (e) => {
        if (this.state.hidden) {
          this.setState(({ count }) => {
@@ -69,6 +71,7 @@ class Chat extends React.Component {
     this.socket.onclose = () => {
       this.setState({messages: []})
       this.setState({errorMessage: 'Lost connection with server. Re-connecting. Restart app if nothing changes'})
+      this.socket = null;
       setTimeout(check(), this.reTryInterval) 
     }
 
@@ -103,6 +106,7 @@ class Chat extends React.Component {
 
   handleSignOut = () => {
     localStorage.removeItem('nickname')
+    this.socket.close();
 }
 
   render() {
