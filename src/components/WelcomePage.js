@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
+const useStyles = makeStyles({
     container: {
         margin: '10px'
     },
@@ -15,29 +15,23 @@ const styles = theme => ({
     }
   });
 
-class WelcomePage extends React.Component {
+export default () => {
 
-    state = {
-        nickname: ''
-    }
+    const [nickname, setNickname] = useState('')
 
-    componentDidMount() {
-        const nickname = localStorage.getItem('nickname')
-        this.setState({
-          nickname
-        })
-      }
+    useEffect(() => {
+        setNickname(localStorage.getItem('nickname'))
+    }, [])
 
 
-    handleSignIn = (e) => {
+    const handleSignIn = (e) => {
         e.preventDefault();
-        this.setState({nickname: e.target.nickname.value})
+        setNickname(e.target.nickname.value)
         localStorage.setItem('nickname', e.target.nickname.value)
     }
 
-    render() {
-        const { classes } = this.props;
-        if (this.state.nickname) {
+        const classes = useStyles()
+        if (nickname) {
             return <Redirect to="/chat" />
         } else {
             return (
@@ -53,7 +47,7 @@ class WelcomePage extends React.Component {
                 className={classes.element}
                 >to the chat app build with React, Material-UI and websocket server
                 </Typography>
-                <form onSubmit={this.handleSignIn}>
+                <form onSubmit={handleSignIn}>
                     <Input 
                     name="nickname"
                     placeholder="please type your nickname"
@@ -71,6 +65,4 @@ class WelcomePage extends React.Component {
             </div>
             )
         }
-}}
-
-export default withStyles(styles)(WelcomePage);
+    }
