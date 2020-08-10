@@ -20,8 +20,7 @@ const useStyles = makeStyles({
         textDecoration: 'none',
         color: '#fff'
     }
-
-})
+});
 
 export default ({ nickname, handleSignOut }) => {
     const classes = useStyles()
