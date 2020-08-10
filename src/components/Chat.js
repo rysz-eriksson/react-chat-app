@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-let socket = null
+let socket = undefined
 
 const connect = () => {
   if (!socket || socket.readyState === 3) {
@@ -62,8 +62,7 @@ const messageListener = useCallback((event) => {
       socket.close()
     }, [])
 
-    const closeListener = useCallback(
-      event => {
+    const closeListener = useCallback(() => {
       setMessages([]);
       setErrMess('Lost connection with server. Re-connecting. Restart app if nothing changes')
       socket = null;
@@ -82,8 +81,9 @@ const messageListener = useCallback((event) => {
       })
   }, [visibilityListener])
 
+
   useEffect(() => {
-  connect();
+  connect()
   socket.addEventListener('message', messageListener);
   socket.addEventListener('error', errorListener)
   socket.addEventListener('close', closeListener)
