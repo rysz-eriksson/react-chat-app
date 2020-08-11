@@ -7,18 +7,27 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import { sound, playSound } from '../services/sound'
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '30vw',
     minWidth: '300px',
-    minHeight: '450px',
     height: '45vw',
+    minHeight: '450px',
     borderRadius: '10px',
     backgroundColor: '#fafafa',
     display: 'flex',
     flexDirection: 'column',
-  }
-});
+    [theme.breakpoints.down('md')]: {
+      width: '40vw',
+      height: '60vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '50vw',
+      height: '75vw',
+    },
+  },
+}));
 
 let socket = undefined
 

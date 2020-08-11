@@ -23,10 +23,8 @@ const useStyles = makeStyles({
     },
     picker: {
         position: 'absolute',
-        bottom: '60px',
+        bottom: '55px',
         left: '5px',
-        display: 'flex',
-        flexDirection: 'row-reverse'
     }
 });
 
