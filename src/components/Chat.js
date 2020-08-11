@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 import Header from './Header';
@@ -34,8 +33,6 @@ let socket = undefined
 const connect = () => {
   if (!socket || socket.readyState === 3) {
         socket = new WebSocket('ws://st-chat.shas.tel')
-        socket.id = uuidv4()
-        console.log(socket.id)
     }
 }
 export default () => {
@@ -96,7 +93,6 @@ const messageListener = useCallback((event) => {
   socket.addEventListener('message', messageListener);
   socket.addEventListener('error', errorListener)
   socket.addEventListener('close', closeListener)
-  console.log(socket.id)
 
   return () => {
     socket.removeEventListener('message', messageListener);
@@ -111,7 +107,6 @@ const messageListener = useCallback((event) => {
       from: nickname,
       message
   }));
-  console.log(socket.id)
   }
 
   const handleSignOut = () => {
