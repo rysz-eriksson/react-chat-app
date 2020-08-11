@@ -2,15 +2,27 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Chat from './components/Chat';
 import WelcomePage from './components/WelcomePage'
-import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: '#FEECD0'
+  }
+});
 
 const App = () => {
+  const classes = useStyles();
     return (
-      <Router>
-        <Route path="/" exact component={WelcomePage} />
-        <Route path="/chat" component={Chat} />
-      </Router>
+      <div className={classes.root}>
+        <Router>
+          <Route path="/" exact component={WelcomePage} />
+          <Route path="/chat" component={Chat} />
+        </Router>
+      </div>
     );
 }
 
