@@ -8,6 +8,9 @@ import 'emoji-mart/css/emoji-mart.css';
 
 const useStyles = makeStyles({
     root: {
+        position: 'relative',
+    },
+    form: {
         display: 'flex',
         height: '50px',
         backgroundColor: '#fafafa',
@@ -20,7 +23,10 @@ const useStyles = makeStyles({
     },
     picker: {
         position: 'absolute',
-        left: '20px'
+        bottom: '60px',
+        left: '5px',
+        display: 'flex',
+        flexDirection: 'row-reverse'
     }
 });
 
@@ -41,14 +47,8 @@ export default (props) => {
 
     const classes = useStyles();
         return (
-            <form onSubmit={handleSubmit} className={classes.root}>
-                {showEmojiPicker && <Picker 
-                set="facebook"
-                className={classes.picker}
-                onSelect={(emoji) => {
-                    setMessage(`${message}${emoji.native}`)
-                }}
-                />}
+        <div className={classes.root}>
+            <form onSubmit={handleSubmit} className={classes.form}>
                 <button 
                 type="button"
                 className={classes.button}
@@ -74,5 +74,18 @@ export default (props) => {
                 type="submit"
               >Send</Button>
             </form>
+            <div className={classes.picker}>
+            {showEmojiPicker && <Picker 
+                set="facebook"
+                style={{ display: 'flex', flexDirection: 'column-reverse' }}
+                emojiSize={18}
+                showPreview={false}
+                showSkinTones={false}
+                onSelect={(emoji) => {
+                    setMessage(`${message}${emoji.native}`)
+                }}
+                />}
+            </div>
+        </div>
         )
 }
